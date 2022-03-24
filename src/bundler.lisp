@@ -46,7 +46,10 @@ most people can unzip)."
 															*ceramic-directory*))
 				(electron-directory (merge-pathnames #p"electron/"
 																	work-directory))
-				(executable-pathname (merge-pathnames (make-pathname :name application-name)
+				(executable-pathname (merge-pathnames (make-pathname
+																		:name (concatenate 'string
+																					application-name
+																					#+win32 ".exe"))
 																	work-directory))
 				(asdf-registry-prelude
 				(if system-directory
