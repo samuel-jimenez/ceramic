@@ -51,7 +51,9 @@
 			:documentation "A unique string ID for the window."))
 	(:documentation "A browser window."))
 
-(defun make-window (&rest window-args &key title url width height frame show transparent resizable (class 'window))
+(defun make-window (&rest window-args
+	&key
+		title url width height frame show transparent resizable fullscreen (class 'window))
 	"Create a window."
 	(flet ((remove-null-values (plist)
 				(loop for (key value) on plist by #'cddr
