@@ -51,7 +51,7 @@
 			:documentation "A unique string ID for the window."))
 	(:documentation "A browser window."))
 
-(defun make-window (&key title url width height frame show transparent resizable (class 'window))
+(defun make-window (&rest window-args &key title url width height frame show transparent resizable (class 'window))
 	"Create a window."
 	(flet ((remove-null-values (plist)
 				(loop for (key value) on plist by #'cddr
@@ -60,14 +60,8 @@
 		(let ((options (cl-ppcre:regex-replace-all
 				":\"true\""
 				(cl-json:encode-json-plist-to-string
-				(remove-null-values
-				(list :title title
-					:width width
-					:height height
-					:frame frame
-					:show show
-					:transparent transparent
-					:resizable resizable)))
+					(remove-null-values
+						window-args))
 				":true"))
 				(win (make-instance class)))
 		(with-slots (%id) win
