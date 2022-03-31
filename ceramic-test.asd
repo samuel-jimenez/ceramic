@@ -4,6 +4,7 @@
   :depends-on (:ceramic
                :ceramic-test-app
                :fiveam)
+  :perform (test-op (o s) (uiop:symbol-call '#:ceramic-test '#:run-tests))
   :components ((:module "t"
                 :serial t
                 :components
