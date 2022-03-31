@@ -23,7 +23,10 @@ jobs:
       - run:
           name: set path
           command: echo "export PATH=$LISP_IMPLS_BIN:$PATH" >> $BASH_ENV
-
+      - run:
+          name: run X virtual framebuffer
+          command: Xvfb :99 -screen 0 1280x1024x24
+          background: true
       - run:
           name: build-ros
           command: ros run -- --version
@@ -127,7 +130,7 @@ jobs:
           name: install testing framework
           command: |
             ros install fiveam
-            ros install ceramic-test
+            ros install ceramic
       - run:
           name: run-sbcl
           command: ros -- test.ros
