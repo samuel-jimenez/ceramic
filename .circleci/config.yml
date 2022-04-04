@@ -79,6 +79,7 @@ jobs:
 
       - run:
           name: run-sbcl
+          no_output_timeout: 3m
           command: |
             ros config set default.lisp sbcl-bin
             COVERALLS=true ./test.ros
@@ -141,6 +142,7 @@ jobs:
             ros install ceramic
       - run:
           name: run-sbcl
+          no_output_timeout: 3m
           command: ros -- test.ros
 
 # Invoke jobs via workflows
