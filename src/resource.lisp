@@ -41,6 +41,7 @@
 ;;; Define resources
 
 (defun call-define-resources (system-name pairs)
+	(format T "~%call-define-resources: ~a ~a ~%" system-name pairs)
 	(loop for (tag . directory) in pairs do
 		(push (make-instance 'resource
 									:tag tag
@@ -88,4 +89,5 @@ tag."
 									(make-pathname :directory (list :relative
 																			destination-name))
 									directory)))
+		(format T "~%copy: ~a ~a ~a~%" source-directory destination-name destination)
 		(copy-directory:copy source-directory destination))))
