@@ -81,8 +81,6 @@ tag."
 
 (defun copy-resources (directory)
 	"Copy all resource directories to @cl:param(directory)."
-	(format T "~%copy-resources: ~a ~%" *resources*)
-
 	(loop for resource in *resources* do
 		(let* ((source-directory (asdf:system-relative-pathname (resource-system resource)
 																				(resource-pathname resource)))
