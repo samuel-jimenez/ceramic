@@ -20,12 +20,12 @@
 
 (test compiled
   (finishes
-    (asdf:load-system :ceramic-test-app :force t))
+    (asdf:load-system :ceramic-test-app))
   (let* ((app-file (merge-pathnames #p"ceramic-test-app.tar"
                                     *extraction-directory*))
          (binary (merge-pathnames #p"ceramic-test-app"
                                   *extraction-directory*)))
-    (ensure-directories-exist *extraction-directory*)
+    (ensure-directories-exist app-file)
     (finishes
       (ceramic.bundler:bundle :ceramic-test-app
                               :bundle-pathname app-file))
