@@ -107,12 +107,26 @@ jobs:
           command:  |
             $ProgressPreference = "SilentlyContinue"
             scoop install roswell
+      - run:
+          name: configure roswell
+          command:  |
+            mkdir -p C:\Users\circleci\AppData\Local\config\common-lisp
+            $String1 = @"
+              (:source-registry
+                (:tree "/Users/circleci/project")
+                :INHERIT-CONFIGURATION)
+            "@
+            Add-Content "C:\Users\circleci\AppData\Local\config\common-lisp\source-registry.conf" $String1
 
       - run:
           name: clone dependencies
           command: |
             git clone https://github.com/samuel-jimenez/trivial-exe C:/Users/circleci/project/lisp/trivial-exe
             git clone https://github.com/samuel-jimenez/trivial-build C:/Users/circleci/project/lisp/trivial-build
+      - run:
+          name: install testing framework
+          command: |
+            ros install ceramic-test
       - run:
           name: init roswell test file
           command: |
@@ -135,11 +149,6 @@ jobs:
             "@
             Add-Content "test.ros" $String1
       - run:
-          name: install testing framework
-          command: |
-            ros install fiveam
-            ros install ceramic
-      - run:
           name: run-sbcl
           no_output_timeout: 3m
           command: ros -- test.ros
@@ -149,5 +158,5 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - build-linux
-#      - build-win
+#      - build-linux
+      - build-win
