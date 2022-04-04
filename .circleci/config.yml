@@ -25,7 +25,7 @@ jobs:
           command: echo "export PATH=$LISP_IMPLS_BIN:$PATH" >> $BASH_ENV
       - run:
           name: run X virtual framebuffer
-          command: Xvfb :99 -screen 0 1280x1024x24
+          command: xvfb :99 -screen 0 1280x1024x24
           background: true
       - run:
           name: build-ros
