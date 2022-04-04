@@ -34,16 +34,7 @@ most people can unzip)."
 
 (defun bundle (system-name &key bundle-pathname system-directory)
 	"Compile the application to an executable, and ship it with its resources."
-
-	(loop for resource in ceramic.resource::*resources* do
-		(format T "~%~a~%" (ceramic.resource::resource-tag resource)))
-
 	(require system-name)
-
-	(loop for resource in ceramic.resource::*resources* do
-		(format T "~%~a~%" (ceramic.resource::resource-tag resource)))
-
-
 	(let* ((application-name (string-downcase
 											(symbol-name system-name)))
 				(bundle (make-pathname :name application-name
