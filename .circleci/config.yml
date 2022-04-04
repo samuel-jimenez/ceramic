@@ -26,7 +26,9 @@ jobs:
 
       - run:
           name: install X virtual framebuffer
-          command: sudo apt-get install xvfb
+          command: |
+            sudo apt-get update -y
+            sudo apt-get install -y xvfb
       - run:
           name: run X virtual framebuffer
           command: xvfb :99 -screen 0 1280x1024x24
