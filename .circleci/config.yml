@@ -28,10 +28,12 @@ jobs:
           name: install X virtual framebuffer
           command: |
             sudo apt-get update -y
-            sudo apt-get install -y xvfb
+            sudo apt-get install -y xvfb libnss3 librust-gdk-pixbuf-sys-dev libgtk-3-0 libxss1 libasound2
       - run:
           name: run X virtual framebuffer
-          command: Xvfb :99 -screen 0 1280x1024x24
+          command: |
+            export DISPLAY=:99.0
+            Xvfb :99 -screen 0 1280x1024x24
           background: true
       - run:
           name: build-ros
