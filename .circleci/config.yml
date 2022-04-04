@@ -42,6 +42,13 @@ jobs:
           command: |
             git clone https://github.com/samuel-jimenez/trivial-exe ~/lisp/trivial-exe
             git clone https://github.com/samuel-jimenez/trivial-build ~/lisp/trivial-build
+
+      - run:
+          name: install testing framework
+          command: |
+            ros install cl-coveralls
+            ros install ceramic-test
+#Project Settings>Environment Variables>COVERALLS_REPO_TOKEN
       - run:
           name: init roswell test file
           command: |
@@ -64,26 +71,20 @@ jobs:
                   (uiop:quit -1))))
             EOF
 
-      - run:
-          name: install testing framework
-          command: |
-            ros install cl-coveralls
-            ros install ceramic-test
-#Project Settings>Environment Variables>COVERALLS_REPO_TOKEN
 
       - run:
           name: run-sbcl
           no_output_timeout: 3m
           command: |
             ros config set default.lisp sbcl-bin
-            COVERALLS=true
-            xvfb-run -a -s "-screen 0 1280x1024x24" ./test.ros
+            COVERALLS=true xvfb-run -a -s "-screen 0 1280x1024x24" ./test.ros
 
       - run:
           name: run-clisp
+          no_output_timeout: 3m
           command: |
             ros config set default.lisp ccl-bin
-            ./test.ros
+            xvfb-run -a -s "-screen 0 1280x1024x24" ./test.ros
 
   build-win:
     executor:
