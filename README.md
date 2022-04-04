@@ -1,7 +1,8 @@
 # [Ceramic](http://ceramic.github.io/)
 
-[![Build Status](https://travis-ci.org/ceramic/ceramic.svg?branch=master)](https://travis-ci.org/ceramic/ceramic)
-[![Coverage Status](https://coveralls.io/repos/ceramic/ceramic/badge.svg?branch=master&service=github)](https://coveralls.io/github/ceramic/ceramic?branch=master)
+
+[![CircleCI](https://circleci.com/gh/samuel-jimenez/ceramic/tree/master.svg?style=svg)](https://circleci.com/gh/samuel-jimenez/ceramic/tree/master)
+[![Coverage Status](https://coveralls.io/repos/github/samuel-jimenez/ceramic/badge.svg?branch=master&kill_cache=1)](https://coveralls.io/github/samuel-jimenez/ceramic?branch=master)
 [![Quicklisp](http://quickdocs.org/badge/ceramic.svg)](http://quickdocs.org/ceramic/)
 
 Common Lisp web apps on the desktop.

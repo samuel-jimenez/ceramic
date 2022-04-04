@@ -8,6 +8,10 @@
   :description "Resource tests.")
 (in-suite resource)
 
+
+
+(defvar *app-resources* ceramic.resource::*resources*)
+
 (test resources
   (signals ceramic.error:no-such-tag
     (ceramic.resource::get-resource 'non-existent-tag))
@@ -22,4 +26,6 @@
     (finishes
       (ceramic.resource:resource-directory 'tag)))
   (finishes
-    (setf ceramic.resource::*resources* (list))))
+    (setf ceramic.resource::*resources* (list)))
+  (finishes
+    (setf ceramic.resource::*resources* *app-resources*)))
