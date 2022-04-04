@@ -19,8 +19,6 @@
     (ceramic:stop)))
 
 (test compiled
-  (finishes
-    (asdf:load-system :ceramic-test-app))
   (let* ((app-file (merge-pathnames #p"ceramic-test-app.tar"
                                     *extraction-directory*))
          (binary (merge-pathnames #p"ceramic-test-app"
@@ -29,6 +27,11 @@
     (finishes
       (ceramic.bundler:bundle :ceramic-test-app
                               :bundle-pathname app-file))
+
+
+  (loop for resource in ceramic.resource::*resources* do
+    (format T "~a" (ceramic.resource::resource-tag resource)))
+
     (is-true
      (probe-file app-file))
     (finishes
