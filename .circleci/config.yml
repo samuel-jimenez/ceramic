@@ -28,13 +28,7 @@ jobs:
           name: install X virtual framebuffer
           command: |
             sudo apt-get update -y
-            sudo apt-get install -y xvfb libnss3 librust-gdk-pixbuf-sys-dev libgtk-3-0 libxss1 libasound2
-      - run:
-          name: run X virtual framebuffer
-          command: |
-            export DISPLAY=:99.0
-            Xvfb :99 -screen 0 1280x1024x24
-          background: true
+            sudo apt-get install -y xvfb libnss3 libgtk-3-0 libxss1 libasound2
       - run:
           name: build-ros
           command: ros run -- --version
@@ -82,7 +76,8 @@ jobs:
           no_output_timeout: 3m
           command: |
             ros config set default.lisp sbcl-bin
-            COVERALLS=true ./test.ros
+            COVERALLS=true
+            xvfb-run -a -s "-screen 0 1280x1024x24" ./test.ros
 
       - run:
           name: run-clisp
@@ -151,4 +146,4 @@ workflows:
   build-and-test:
     jobs:
       - build-linux
-      - build-win
+#      - build-win
