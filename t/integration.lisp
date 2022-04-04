@@ -28,9 +28,10 @@
       (ceramic.bundler:bundle :ceramic-test-app
                               :bundle-pathname app-file))
 
+    (format T "~% ~a ~%" 'compiled)
 
   (loop for resource in ceramic.resource::*resources* do
-    (format T "~a" (ceramic.resource::resource-tag resource)))
+    (format T "~% ~a ~%" (ceramic.resource::resource-tag resource)))
 
     (is-true
      (probe-file app-file))

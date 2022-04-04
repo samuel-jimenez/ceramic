@@ -34,6 +34,8 @@ most people can unzip)."
 
 (defun bundle (system-name &key bundle-pathname system-directory)
 	"Compile the application to an executable, and ship it with its resources."
+	(log-message "bundling...")
+	(format T "~%~a~%" system-name)
 
 	(loop for resource in ceramic.resource::*resources* do
 		(format T "~%~a~%" (ceramic.resource::resource-tag resource)))
