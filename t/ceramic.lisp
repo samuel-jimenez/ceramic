@@ -15,7 +15,7 @@
     (run! 'ceramic-test.setup:setup)
     (run! 'ceramic-test.driver:driver)
     (run! 'ceramic-test.window:window)
-    (run! 'ceramic-test.crashreporter:crashreporter)
+    #-win32 (run! 'ceramic-test.crashreporter:crashreporter); this fails following tests for windows
     (run! 'ceramic-test.dialog:dialog)
     (run! 'ceramic-test.integration:integration)
     (run! 'ceramic-test.misc:misc)

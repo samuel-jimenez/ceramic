@@ -21,21 +21,19 @@
 (test compiled
   (let* ((app-file (merge-pathnames #p"ceramic-test-app.tar"
                                     *extraction-directory*))
-         (binary (merge-pathnames #p"ceramic-test-app"
+         (binary (merge-pathnames (concatenate 'string
+                                          "ceramic-test-app"
+                                          #+win32 ".exe")
                                   *extraction-directory*)))
     (ensure-directories-exist app-file)
     (finishes
       (ceramic.bundler:bundle :ceramic-test-app
                               :bundle-pathname app-file))
-
-
-  (loop for resource in ceramic.resource::*resources* do
-    (format T "~a" (ceramic.resource::resource-tag resource)))
-
     (is-true
      (probe-file app-file))
     (finishes
-      (trivial-extract:extract-tar app-file))
+      #-win32 (trivial-extract:extract-tar app-file)
+      #+win32 (trivial-extract:extract-zip app-file))
     (is-true
      (probe-file binary))
     (is-true
