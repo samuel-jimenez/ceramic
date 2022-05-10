@@ -12,6 +12,8 @@
 								:copy-resources)
 	(:import-from :electron-tools
 								:binary-pathname)
+	(:import-from :ceramic.setup
+								:setup)
 	(:export :bundle)
 	(:documentation "Release applications."))
 (in-package :ceramic.bundler)
@@ -61,6 +63,7 @@ most people can unzip)."
 		(ensure-directories-exist work-directory)
 		(unwind-protect
 				(progn
+					(setup)
 					(log-message "Copying resources...")
 					;; Copy application resources
 					(copy-resources (merge-pathnames #p"resources/"
